@@ -2,7 +2,7 @@ require "test_helper"
 
 class KnightsTravailsTest < Minitest::Test
   def test_winner
-    seen = 
+    seen =
       {
         a1: :root,
         b1: :a1,
