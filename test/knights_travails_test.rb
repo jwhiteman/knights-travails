@@ -44,4 +44,23 @@ class KnightsTravailsTest < Minitest::Test
 
     assert_equal [], queue
   end
+
+  def test_calculate_next_squares
+    assert false # complete me
+
+    @subject.calculate_next_squares(:d5)
+
+    [
+      :c7,     :e7,
+      :b6,     :f6,
+      :b4,     :f4,
+      :c3,     :e3
+    ]
+
+    @subject.calculate_next_squares(:a1)
+
+    [
+      :b3, :c2
+    ]
+  end
 end
