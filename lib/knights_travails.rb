@@ -14,4 +14,8 @@ module KnightsTravails
       _winner(seen[key], seen, acc << key)
     end
   end
+
+  def add_seen(key, parent, seen)
+    seen[key] = parent
+  end
 end
