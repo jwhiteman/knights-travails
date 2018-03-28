@@ -28,4 +28,20 @@ class KnightsTravailsTest < Minitest::Test
 
     assert_equal :a1, seen[:b1]
   end
+
+  def test_add_queue
+    queue = []
+
+    @subject.add_queue(%i(b c d), :a, queue)
+
+    assert_equal [[:a, %i(b c d)]], queue
+  end
+
+  def test_add_queue_with_empty_squares
+    queue = []
+
+    @subject.add_queue([], :a, queue)
+
+    assert_equal [], queue
+  end
 end

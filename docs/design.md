@@ -19,12 +19,6 @@
         - add-queue(next-squares, s, $queue)
   - return nil // failure
 
-- add-queue(squares, parent, $queue)
-  - $queue << [parent, squares] if squares present
-
-- add-seen(square, parent, $seen)
-  - $seen[square] = parent
-
 - calculate-next-squares(square, $seen)
   - TBD
   - filter $seen // 8x operations in the worst case...

@@ -18,4 +18,12 @@ module KnightsTravails
   def add_seen(key, parent, seen)
     seen[key] = parent
   end
+
+  def add_queue(squares, parent, queue)
+    if squares.any?
+      queue << [parent, squares]
+    else
+      false
+    end
+  end
 end
