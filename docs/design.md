@@ -1,5 +1,3 @@
-# http://rubyquiz.com/quiz27.html
-
 - instantiate $seen
 - instantiate $queue
 
