@@ -1,6 +1,8 @@
 module KnightsTravails
   extend self
 
+  attr_accessor :verbose
+
   def shortest_path(start:, destination:, forbidden:)
     seen = {}
     add_seen(start, :root, seen)
@@ -29,6 +31,7 @@ module KnightsTravails
       end
     end
 
+    puts "failed: #{seen}" if verbose
     false
   end
 
