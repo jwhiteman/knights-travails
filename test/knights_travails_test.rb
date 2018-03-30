@@ -72,6 +72,12 @@ class KnightsTravailsTest < Minitest::Test
     assert_equal %i(c7), @subject.calculate_next_squares(:a8, seen)
   end
 
+  def test_calculate_next_squares_g1
+    seen = {}
+
+    assert_equal %i(f3 h3 e2), @subject.calculate_next_squares(:g1, seen)
+  end
+
   def test_shortest_path_with_trivial_solution
     assert_equal [:a1],
                  @subject.shortest_path(start: :a1,
@@ -92,5 +98,24 @@ class KnightsTravailsTest < Minitest::Test
     assert_nil @subject.shortest_path(start: :a8,
                                       destination: :g6,
                                       forbidden: %i(b6 c7))
+  end
+
+  def test_shortest_path_a1_to_h3
+    expected = %i(a8 c7 e6 g5 h3)
+
+    assert_equal expected,
+                 @subject.shortest_path(start: :a8,
+                                        destination: :h3,
+                                        forbidden: %i())
+  end
+
+  def test_shortest_path_a1_to_h3_with_forbidden
+    expected = %i(a8 b6 c4 d2 f3 g1 h3)
+
+    assert_equal expected,
+                 @subject.shortest_path(start: :a8,
+                                        destination: :h3,
+                                        forbidden: %i(c7 d5 d3 e3 e5 a4 d7 c8
+                                                      g5 e4 d1))
   end
 end

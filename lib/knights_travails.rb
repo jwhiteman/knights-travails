@@ -69,7 +69,7 @@ module KnightsTravails
       [alpha + 1, numeric - 2]
     ].
     select do |alpha, numeric|
-      alpha > 96 && alpha < 104 && numeric > 48 && numeric < 57
+      alpha > 96 && alpha < 105 && numeric > 48 && numeric < 57
     end.
     map do |square|
       square.
