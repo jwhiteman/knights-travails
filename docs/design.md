@@ -18,7 +18,3 @@
         - next-squares = calculate-next-squares(s, $seen)
         - add-queue(next-squares, s, $queue)
   - return nil // failure
-
-- calculate-next-squares(square, $seen)
-  - TBD
-  - filter $seen // 8x operations in the worst case...

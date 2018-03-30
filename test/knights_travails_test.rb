@@ -46,21 +46,18 @@ class KnightsTravailsTest < Minitest::Test
   end
 
   def test_calculate_next_squares
-    assert false # complete me
+    expected =
+      [
+        :c7, :e7,
+        :b6, :f6,
+        :b4, :f4,
+        :c3, :e3
+      ]
 
-    @subject.calculate_next_squares(:d5)
+    assert_equal expected, @subject.calculate_next_squares(:d5)
 
-    [
-      :c7,     :e7,
-      :b6,     :f6,
-      :b4,     :f4,
-      :c3,     :e3
-    ]
+    expected = [:b3, :c2]
 
-    @subject.calculate_next_squares(:a1)
-
-    [
-      :b3, :c2
-    ]
+    assert_equal expected, @subject.calculate_next_squares(:a1)
   end
 end
