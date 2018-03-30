@@ -2,36 +2,34 @@ module KnightsTravails
   extend self
 
   def shortest_path(start:, destination:, forbidden:)
-    seen = Hash.new
+    seen = {}
     add_seen(start, :root, seen)
 
-    if start == destination
-      return winner(start, seen)
-    else
-      queue = Array.new
+    return winner(start, seen) if start == destination
 
-      forbidden.each do |forbidden_square|
-        add_seen(forbidden_square, :forbidden, seen)
-      end
+    queue = []
 
-      next_squares = calculate_next_squares(start, seen)
-      add_queue(next_squares, start, queue)
+    forbidden.each do |forbidden_square|
+      add_seen(forbidden_square, :forbidden, seen)
+    end
 
-      queue.each do |parent, squares|
-        squares.each do |square|
-          add_seen(square, parent, seen)
+    next_squares = calculate_next_squares(start, seen)
+    add_queue(next_squares, start, queue)
 
-          if square == destination
-            return winner(square, seen)
-          else
-            next_squares = calculate_next_squares(square, seen)
-            add_queue(next_squares, square, queue)
-          end
+    queue.each do |parent, squares|
+      squares.each do |square|
+        add_seen(square, parent, seen)
+
+        if square == destination
+          return winner(square, seen)
+        else
+          next_squares = calculate_next_squares(square, seen)
+          add_queue(next_squares, square, queue)
         end
       end
-
-      return nil
     end
+
+    false
   end
 
   def winner(key, seen)
@@ -54,8 +52,8 @@ module KnightsTravails
     end
   end
 
-  def calculate_next_squares(square, seen)
-    alpha, numeric = square.
+  def calculate_next_squares(current_square, seen)
+    alpha, numeric = current_square.
                      to_s.
                      unpack("c*")
 
@@ -81,8 +79,8 @@ module KnightsTravails
       valid_possible_chars.
       map do |square|
         square.
-          pack("c*").
-          intern
+        pack("c*").
+        intern
       end
 
     valid_squares =

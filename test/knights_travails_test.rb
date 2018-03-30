@@ -95,9 +95,9 @@ class KnightsTravailsTest < Minitest::Test
   end
 
   def test_shortest_path_with_no_solution
-    assert_nil @subject.shortest_path(start: :a8,
-                                      destination: :g6,
-                                      forbidden: %i(b6 c7))
+    refute @subject.shortest_path(start: :a8,
+                                  destination: :g6,
+                                  forbidden: %i(b6 c7))
   end
 
   def test_shortest_path_a1_to_h3
