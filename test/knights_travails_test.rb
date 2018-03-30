@@ -18,7 +18,7 @@ class KnightsTravailsTest < Minitest::Test
         h1: :c1, # winner
       }
 
-    assert_equal %i(h1 c1 a1), @subject.winner(:h1, seen)
+    assert_equal %i(a1 c1 h1), @subject.winner(:h1, seen)
   end
 
   def test_add_seen_with_parent
@@ -45,7 +45,9 @@ class KnightsTravailsTest < Minitest::Test
     assert_equal [], queue
   end
 
-  def test_calculate_next_squares
+  def test_calculate_next_squares_in_center
+    seen = {}
+
     expected =
       [
         :c7, :e7,
@@ -54,10 +56,41 @@ class KnightsTravailsTest < Minitest::Test
         :c3, :e3
       ]
 
-    assert_equal expected, @subject.calculate_next_squares(:d5)
+    assert_equal expected, @subject.calculate_next_squares(:d5, seen)
+  end
 
-    expected = [:b3, :c2]
+  def test_calculate_next_squares_on_corner
+    seen = {}
 
-    assert_equal expected, @subject.calculate_next_squares(:a1)
+    assert_equal %i(b3 c2), @subject.calculate_next_squares(:a1, seen)
+  end
+
+
+  def test_calculate_next_squares_with_seen
+    seen = { b6: :forbidden }
+
+    assert_equal %i(c7), @subject.calculate_next_squares(:a8, seen)
+  end
+
+  def test_shortest_path_with_trivial_solution
+    assert_equal [:a1],
+                 @subject.shortest_path(start: :a1,
+                                        destination: :a1,
+                                        forbidden: %i())
+  end
+
+  def test_shortest_path_with_solution
+    expected = %i(a8 c7 b5 d6 b7)
+
+    assert_equal expected,
+                 @subject.shortest_path(start: :a8,
+                                        destination: :b7,
+                                        forbidden: %i(b6))
+  end
+
+  def test_shortest_path_with_no_solution
+    assert_nil @subject.shortest_path(start: :a8,
+                                      destination: :g6,
+                                      forbidden: %i(b6 c7))
   end
 end
