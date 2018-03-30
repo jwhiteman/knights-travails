@@ -9,15 +9,15 @@ module KnightsTravails
 
     queue = []
 
-    forbidden.each do |forbidden_square|
+    for forbidden_square in forbidden do
       add_seen(forbidden_square, :forbidden, seen)
     end
 
     next_squares = calculate_next_squares(start, seen)
     add_queue(next_squares, start, queue)
 
-    queue.each do |parent, squares|
-      squares.each do |square|
+    for parent, squares in queue do
+      for square in squares do
         add_seen(square, parent, seen)
 
         if square == destination
@@ -55,7 +55,7 @@ module KnightsTravails
   def calculate_next_squares(current_square, seen)
     alpha, numeric = current_square.
                      to_s.
-                     unpack("c*")
+                     unpack("cc")
 
     all_possible_chars =
       [
@@ -79,7 +79,7 @@ module KnightsTravails
       valid_possible_chars.
       map do |square|
         square.
-        pack("c*").
+        pack("cc").
         intern
       end
 
