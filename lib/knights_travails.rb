@@ -58,25 +58,39 @@ module KnightsTravails
     alpha, numeric = square.
                      to_s.
                      unpack("c*")
-    [
-      [alpha - 1, numeric + 2],
-      [alpha + 1, numeric + 2],
-      [alpha - 2, numeric + 1],
-      [alpha + 2, numeric + 1],
-      [alpha - 2, numeric - 1],
-      [alpha + 2, numeric - 1],
-      [alpha - 1, numeric - 2],
-      [alpha + 1, numeric - 2]
-    ].
-    select do |alpha, numeric|
-      alpha > 96 && alpha < 105 && numeric > 48 && numeric < 57
-    end.
-    map do |square|
-      square.
-        pack("c*").
-        intern
-    end.reject do |square|
-      seen[square]
-    end
+
+    all_possible_chars =
+      [
+        [alpha - 1, numeric + 2],
+        [alpha + 1, numeric + 2],
+        [alpha - 2, numeric + 1],
+        [alpha + 2, numeric + 1],
+        [alpha - 2, numeric - 1],
+        [alpha + 2, numeric - 1],
+        [alpha - 1, numeric - 2],
+        [alpha + 1, numeric - 2]
+      ]
+
+    valid_possible_chars =
+      all_possible_chars.
+      select do |alpha, numeric|
+        (alpha > 96 && alpha < 105) && (numeric > 48 && numeric < 57)
+      end
+
+    valid_possible_squares =
+      valid_possible_chars.
+      map do |square|
+        square.
+          pack("c*").
+          intern
+      end
+
+    valid_squares =
+      valid_possible_squares.
+      reject do |square|
+        seen[square]
+      end
+
+    valid_squares
   end
 end
